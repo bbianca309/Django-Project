@@ -1,0 +1,17 @@
+{% extends 'booking/base.html' %}
+{% block content %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <div class="alert alert-success shadow text-center rounded-4">
+        <i class="fa-solid fa-circle-check fa-3x text-success mb-3"></i>
+        <h4 class="alert-heading">Programare realizată cu succes!</h4>
+        <p class="mb-3">Te așteptăm cu drag la salon 🌸</p>
+        <a href="{% url 'index' %}" class="btn btn-outline-success px-4 rounded-pill">
+          <i class="fa-solid fa-arrow-left"></i> Înapoi la prima pagină
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,141 @@
+{% extends 'booking/base.html' %}
+{% load static %}
+{% block content %}
+<style>
+  @keyframes gradientShift {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  .price-wrapper {
+    position: relative;
+    padding: 60px 0;
+    background: linear-gradient(135deg, #ffd6e8 0%, #f7c6d9 50%, #e8b2d6 100%);
+    background-size: 300% 300%;
+    animation: gradientShift 20s ease infinite;
+    overflow: hidden;
+    border-radius: 20px;
+    margin: 40px auto;
+    max-width: 1000px;
+  }
+  .price-wrapper::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: inherit;
+    filter: blur(60px);
+    z-index: 0;
+    animation: gradientShift 10s ease infinite;
+  }
+  .price-container {
+    position: relative;
+    z-index: 1;
+  }
+  .table-pink {
+    background: linear-gradient(90deg, #ca1f97, #81286b);
+  }
+  .table-pink th {
+    border: none;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+  .table-hover tbody tr:hover {
+    background-color: #f9e6f2;
+    transition: background-color 0.3s ease;
+  }
+  .table-responsive {
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(198, 42, 113, 0.2);
+  }
+  table.table {
+    border-collapse: separate;
+    border-spacing: 0 8px;
+  }
+  table.table tbody tr {
+    background-color: #fff0f6;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(198, 42, 113, 0.1);
+  }
+  table.table tbody tr td {
+    vertical-align: middle;
+  }
+  .btn-pink {
+    background-color: #ca1f97;
+    color: white;
+    border: none;
+    font-weight: 600;
+    border-radius: 50px;
+    padding: 12px 30px;
+    transition: background-color 0.3s ease;
+  }
+  .btn-pink:hover {
+    background-color: #81286b;
+    color: white;
+  }
+  .text-pink {
+    color: #ca1f97 !important;
+  }
+</style>
+
+<div class="price-wrapper">
+  <div class="price-container container">
+    <h2 class="text-center text-pink mb-2" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+      <i class="fa-solid fa-money-bill-wave"></i> Lista de Prețuri
+    </h2>
+    <p class="text-center mb-4" style="font-style: italic; color: #7a2a4d; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+      Servicii premium într-un ambient elegant și feminin ✨
+    </p>
+
+    <div class="row justify-content-center">
+      <div class="col-md-10">
+        <div class="table-responsive shadow rounded">
+          <table class="table table-hover table-striped align-middle">
+            <thead class="table-pink text-white text-center">
+              <tr>
+                <th scope="col"><i class="fa-solid fa-star"></i> Serviciu</th>
+                <th scope="col"><i class="fa-regular fa-clock"></i> Durată</th>
+                <th scope="col"><i class="fa-solid fa-money-bill"></i> Preț</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Manichiură clasică</td><td>35 min</td><td>50 lei</td></tr>
+              <tr><td>Manichiură semipermanentă</td><td>1 h 40 min</td><td>120 lei</td></tr>
+              <tr><td>Construcție gel</td><td>3 h</td><td>250 lei</td></tr>
+              <tr><td>Construcție slim</td><td>3 h 30 min (max)</td><td>270 lei</td></tr>
+              <tr><td>Întreținere gel</td><td>2 h</td><td>150 lei</td></tr>
+              <tr><td>Pedichiură clasică</td><td>1 h</td><td>80 lei</td></tr>
+              <tr><td>Pedichiură oja semipermanentă</td><td>1 h 20 min</td><td>100 lei</td></tr>
+              <tr><td>Epilat lung</td><td>30 min</td><td>60 lei</td></tr>
+              <tr><td>Epilat scurt</td><td>15 min</td><td>40 lei</td></tr>
+              <tr><td>Epilat inghinal total</td><td>30 min</td><td>60 lei</td></tr>
+              <tr><td>Epilat axilă</td><td>10 min</td><td>20 lei</td></tr>
+              <tr><td>Epilat brațe</td><td>15 min</td><td>40 lei</td></tr>
+              <tr><td>Epilat mustață</td><td>10 min</td><td>20 lei</td></tr>
+              <tr><td>Epilat spate & abdomen</td><td>20 min</td><td>50 lei</td></tr>
+              <tr><td>Pensat</td><td>30 min</td><td>35 lei</td></tr>
+              <tr><td>Vopsit sprâncene/gene</td><td>10 min</td><td>30 lei</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-4">
+      <a href="{% url 'book' %}" class="btn btn-pink btn-lg shadow-sm">
+        <i class="fa-regular fa-calendar-check"></i> Programează-te acum
+      </a>
+    </div>
+  </div>
+</div>
+{% endblock %}

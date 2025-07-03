@@ -1,0 +1,47 @@
+{% extends 'booking/base.html' %}
+{% block content %}
+<h2 class="mb-4">Lista Programărilor</h2>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Nume</th>
+      <th>Telefon</th>
+      <th>Serviciu</th>
+      <th>Data</th>
+      <th>Ora</th>
+      <th>Status</th>
+      <th>Acțiuni</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for appt in appointments %}
+      <tr>
+        <td>{{ appt.name }}</td>
+        <td>{{ appt.phone }}</td>
+        <td>{{ appt.get_service_display }}</td>
+        <td>{{ appt.date }}</td>
+        <td>{{ appt.time }}</td>
+        <td>
+          {% if appt.status == 'pending' %}
+            <span class="badge bg-warning text-dark">În așteptare</span>
+          {% elif appt.status == 'confirmed' %}
+            <span class="badge bg-success">Confirmată</span>
+          {% else %}
+            <span class="badge bg-danger">Anulată</span>
+          {% endif %}
+        </td>
+        <td>
+          {% if appt.status != 'confirmed' %}
+            <a href="{% url 'change_appointment_status' appt.id 'confirmed' %}" class="btn btn-sm btn-success">Confirmă</a>
+          {% endif %}
+          {% if appt.status != 'canceled' %}
+            <a href="{% url 'change_appointment_status' appt.id 'canceled' %}" class="btn btn-sm btn-danger">Anulează</a>
+          {% endif %}
+        </td>
+      </tr>
+    {% empty %}
+      <tr><td colspan="7">Nu există programări.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

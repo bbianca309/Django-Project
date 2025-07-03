@@ -1,0 +1,17 @@
+{% extends 'booking/base.html' %}
+{% block content %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <div class="alert alert-warning shadow text-center rounded-4">
+        <i class="fa-solid fa-triangle-exclamation fa-3x text-warning mb-3"></i>
+        <h4 class="alert-heading">Programare anulată</h4>
+        <p class="mb-3">Programarea ta a fost anulată cu succes. Dacă ai nevoie, te rugăm să ne contactezi pentru o nouă programare.</p>
+        <a href="{% url 'index' %}" class="btn btn-outline-warning px-4 rounded-pill">
+          <i class="fa-solid fa-arrow-left"></i> Înapoi la prima pagină
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

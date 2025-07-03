@@ -1,0 +1,114 @@
+{% extends "booking/base.html" %}
+
+{% block content %}
+<div class="text-center py-5">
+  <h1 class="display-4" style="color:#81286b; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+    Bine ai venit la Salon Claudia!
+  </h1>
+  <p class="lead" style="font-style: italic; color: #5a3a5a;">
+    Răsfață-te cu cele mai bune servicii de frumusețe din oraș.
+  </p>
+</div>
+
+<style>
+  @keyframes pulseHeart {
+    0%, 100% {
+      transform: translateX(-50%) scale(1);
+      opacity: 0.15;
+    }
+    50% {
+      transform: translateX(-50%) scale(1.1);
+      opacity: 0.3;
+    }
+  }
+
+  .heart-card {
+    position: relative;
+    background-color: #fff0f6;
+    border-radius: 30px;
+    padding: 3rem 2rem;
+    box-shadow: 0 8px 15px rgba(198, 42, 113, 0.25);
+    text-align: center;
+    overflow: visible;
+    min-height: 320px;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  .heart-card:hover {
+    box-shadow: 0 12px 25px rgba(198, 42, 113, 0.5);
+    transform: translateY(-8px);
+    cursor: pointer;
+  }
+
+  .heart-svg {
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    width: 140px;
+    height: 130px;
+    fill: url(#heartGradient);
+    animation: pulseHeart 3s ease-in-out infinite;
+    z-index: 0;
+  }
+
+  .heart-card > * {
+    position: relative;
+    z-index: 1;
+  }
+</style>
+
+<div class="container">
+  <div class="row g-4 justify-content-center">
+    <div class="col-sm-8 col-md-6 col-lg-4 d-flex justify-content-center">
+      <div class="heart-card">
+        <svg class="heart-svg" viewBox="0 0 32 29.6" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+          <defs>
+            <linearGradient id="heartGradient" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#ca1f97" />
+              <stop offset="100%" stop-color="#81286b" />
+            </linearGradient>
+          </defs>
+          <path d="M23.6,0c-3.1,0-5.8,2-7.6,4.8C14.2,2,11.5,0,8.4,0C3.8,0,0,3.8,0,8.4c0,6.6,9.3,12.1,15.9,21.2
+          c6.5-9.1,15.9-14.6,15.9-21.2C32,3.8,28.2,0,23.6,0z"/>
+        </svg>
+        <h3 style="color: #81286b;">Programul nostru</h3>
+        <p>Luni - Vineri: 09:00 - 24:00<br>Sâmbătă: 09:00 - 24:00<br>Duminică: Închis</p>
+      </div>
+    </div>
+
+    <div class="col-sm-8 col-md-6 col-lg-4 d-flex justify-content-center">
+      <div class="heart-card">
+        <svg class="heart-svg" viewBox="0 0 32 29.6" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+          <defs>
+            <linearGradient id="heartGradient" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#ca1f97" />
+              <stop offset="100%" stop-color="#81286b" />
+            </linearGradient>
+          </defs>
+          <path d="M23.6,0c-3.1,0-5.8,2-7.6,4.8C14.2,2,11.5,0,8.4,0C3.8,0,0,3.8,0,8.4c0,6.6,9.3,12.1,15.9,21.2
+          c6.5-9.1,15.9-14.6,15.9-21.2C32,3.8,28.2,0,23.6,0z"/>
+        </svg>
+        <h3 style="color: #81286b;">Manichiură</h3>
+        <p>Unghii impecabile, elegante și rezistente - pentru un look care inspiră.</p>
+      </div>
+    </div>
+
+    <div class="col-sm-8 col-md-6 col-lg-4 d-flex justify-content-center">
+      <div class="heart-card">
+        <svg class="heart-svg" viewBox="0 0 32 29.6" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+          <defs>
+            <linearGradient id="heartGradient" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#ca1f97" />
+              <stop offset="100%" stop-color="#81286b" />
+            </linearGradient>
+          </defs>
+          <path d="M23.6,0c-3.1,0-5.8,2-7.6,4.8C14.2,2,11.5,0,8.4,0C3.8,0,0,3.8,0,8.4c0,6.6,9.3,12.1,15.9,21.2
+          c6.5-9.1,15.9-14.6,15.9-21.2C32,3.8,28.2,0,23.6,0z"/>
+        </svg>
+        <h3 style="color: #81286b;">Cosmetică</h3>
+        <p>Epilează și îngrijește-ți pielea cu tehnici delicate și eficiente.</p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

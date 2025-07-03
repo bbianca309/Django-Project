@@ -1,0 +1,21 @@
+{% extends 'booking/base.html' %}
+{% block content %}
+<h2 class="mb-4">Notificări</h2>
+<form method="get" class="mb-4">
+  <input type="tel" name="phone" placeholder="Introduceți numărul de telefon" value="{{ phone }}" class="form-control" required pattern="\d{10}" />
+  <button type="submit" class="btn btn-primary mt-2">Vezi notificările</button>
+</form>
+
+{% if notifications %}
+  <ul class="list-group">
+    {% for note in notifications %}
+      <li class="list-group-item {% if not note.read %}fw-bold{% endif %}">
+        {{ note.message }} <br />
+        <small class="text-muted">{{ note.created_at|date:"d M Y H:i" }}</small>
+      </li>
+    {% endfor %}
+  </ul>
+{% elif phone %}
+  <p>Nu există notificări pentru acest număr.</p>
+{% endif %}
+{% endblock %}

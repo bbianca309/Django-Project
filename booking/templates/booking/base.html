@@ -1,0 +1,126 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Salon Claudia</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+  body {
+    padding-top: 70px; /* spațiu pentru navbar fix */
+    /* gradient roz deschis, elegant */
+    background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 50%, #d6336c 100%);
+    color: #4a4a4a;
+    min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  .bg-pink {
+    background-color: #ca1f97 !important;
+  }
+
+  .navbar-brand, .nav-link, .btn-link {
+    color: white !important;
+  }
+
+  .nav-link:hover, .btn-link:hover {
+    color: #ffb8db !important;
+    text-decoration: none;
+  }
+
+  .navbar-toggler {
+    border-color: #fff;
+  }
+
+  .navbar-toggler-icon {
+    filter: invert(1);
+  }
+
+  /* buton deconectare ca link */
+  .btn-link {
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font: inherit;
+    color: inherit;
+  }
+</style>
+
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg bg-pink fixed-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="{% url 'index' %}">
+        <i class="fa-solid fa-heart me-2"></i>Salon Claudia
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-center">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'index' %}">
+              <i class="fa-solid fa-house me-1"></i> Acasă
+            </a>
+          </li>
+          <li class="nav-item">
+        <a class="nav-link" href="{% url 'check_appointments' %}">
+            <i class="fa-solid fa-magnifying-glass me-1"></i> Verifică programări
+        </a>
+        </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'servicii' %}">
+              <i class="fa-regular fa-heart me-1"></i>
+Servicii
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'pret' %}">
+              <i class="fa-solid fa-tags me-1"></i> Prețuri
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'book' %}">
+              <i class="fa-regular fa-calendar-plus me-1"></i> Programează-te
+            </a>
+          </li>
+          {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'appointments_list' %}">
+                <i class="fa-solid fa-list-check me-1"></i> Programări
+              </a>
+            </li>
+            <li class="nav-item">
+              <form method="post" action="{% url 'logout' %}" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-link nav-link p-0">Deconectare</button>
+              </form>
+            </li>
+          {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'login' %}">
+                <i class="fa-solid fa-right-to-bracket me-1"></i> Autentificare
+              </a>
+            </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    {% block content %}
+    {% endblock %}
+  </div>
+
+  <!-- Bootstrap JS Bundle (Popper + Bootstrap JS) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

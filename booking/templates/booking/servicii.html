@@ -1,0 +1,91 @@
+
+{% extends 'booking/base.html' %}
+
+{% block content %}
+<section class="py-5" style="background-color: #fef6f9; color: #4a4a4a;">
+  <div class="container">
+    <h1 class="mb-4 text-center" style="font-weight: 700; color: #81286b; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+      Servicii Premium pentru Tine
+    </h1>
+    <p class="lead text-center mb-5" style="font-style: italic; color: #7a2a4d; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+      Răsfață-te cu cele mai bune tratamente la salonul nostru.
+    </p>
+
+    <style>
+      .heart-card {
+        position: relative;
+        background-color: #fff0f6;
+        border-radius: 30px;
+        padding: 2.5rem 1.5rem;
+        box-shadow: 0 8px 15px rgba(198, 42, 113, 0.25);
+        text-align: center;
+        overflow: visible;
+        min-height: 320px;
+        transition: box-shadow 0.3s ease, transform 0.3s ease;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+      .heart-card:hover {
+        box-shadow: 0 12px 25px rgba(198, 42, 113, 0.5);
+        transform: translateY(-5px);
+        cursor: pointer;
+      }
+      .heart-svg {
+        position: absolute;
+        top: -25px;
+        left: 50%;
+        width: 140px;
+        height: 130px;
+        fill: url(#heartGradient);
+        animation: pulseHeart 3s ease-in-out infinite;
+        z-index: 0;
+        transform: translateX(-50%);
+      }
+      @keyframes pulseHeart {
+        0%, 100% {
+          transform: translateX(-50%) scale(1);
+          opacity: 0.15;
+        }
+        50% {
+          transform: translateX(-50%) scale(1.1);
+          opacity: 0.3;
+        }
+      }
+      .heart-card > * {
+        position: relative;
+        z-index: 1;
+      }
+      .btn-outline-danger {
+        border-color: #d6336c;
+        color: #d6336c;
+        transition: background-color 0.3s, color 0.3s;
+      }
+      .btn-outline-danger:hover {
+        background-color: #d6336c;
+        color: white;
+      }
+    </style>
+
+    <div class="row g-4 justify-content-center">
+      {% for serviciu in servicii %}
+      <div class="col-sm-8 col-md-6 col-lg-4 d-flex justify-content-center">
+        <div class="heart-card">
+          <svg class="heart-svg" viewBox="0 0 32 29.6" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+            <defs>
+              <linearGradient id="heartGradient" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#ca1f97" />
+                <stop offset="100%" stop-color="#81286b" />
+              </linearGradient>
+            </defs>
+            <path d="M23.6,0c-3.1,0-5.8,2-7.6,4.8C14.2,2,11.5,0,8.4,0C3.8,0,0,3.8,0,8.4c0,6.6,9.3,12.1,15.9,21.2
+            c6.5-9.1,15.9-14.6,15.9-21.2C32,3.8,28.2,0,23.6,0z"/>
+          </svg>
+          <h3 style="color: #81286b;">{{ serviciu.nume }}</h3>
+          <p>{{ serviciu.descriere }}</p>
+          <a href="{% url 'book' %}" class="btn btn-outline-danger mt-3">Programează-te</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

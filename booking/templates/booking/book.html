@@ -1,0 +1,150 @@
+{% extends 'booking/base.html' %}
+{% load static %}
+{% block content %}
+<style>
+  @keyframes gentleGradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  .booking-wrapper {
+    max-width: 600px;
+    margin: 3rem auto;
+    padding: 2.5rem 2rem 3rem 2rem;
+    background: linear-gradient(135deg, #ffe1eb 0%, #f9c2d1 50%, #f6a6c0 100%);
+    background-size: 300% 300%;
+    animation: gentleGradient 25s ease infinite;
+    border-radius: 20px;
+    box-shadow: 0 12px 25px rgba(214, 51, 108, 0.3);
+  }
+
+  .booking-wrapper h2.text-pink {
+    color: #f395d7 !important;
+    font-weight: 700;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  .form-label.fw-semibold {
+    color: #81286b;
+  }
+
+  .form-control.shadow-sm,
+  .form-select.shadow-sm {
+    border-radius: 12px;
+    border: 1.5px solid #d6336c;
+    box-shadow: 0 2px 6px rgba(214, 51, 108, 0.1);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .form-control.shadow-sm:focus,
+  .form-select.shadow-sm:focus {
+    border-color: #81286b;
+    box-shadow: 0 0 8px rgba(129, 40, 107, 0.6);
+  }
+
+  .btn {
+    background-color: #d6336c;
+    color: white;
+    font-weight: 600;
+    border-radius: 50px;
+    padding: 12px 0;
+    transition: background-color 0.3s ease;
+  }
+  .btn:hover:not(:disabled) {
+    background-color: #81286b;
+  }
+
+  .alert {
+    border-radius: 15px;
+  }
+</style>
+
+<div class="booking-wrapper">
+  <h2 class="text-center mb-4 text-pink">
+    <i class="fa-regular fa-calendar-plus me-2"></i> Fă-ți o programare
+  </h2>
+
+  {% if messages %}
+    <div class="mb-4">
+      {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Închide"></button>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <!-- Selectare serviciu + dată -->
+  <form method="GET" id="filter-form" class="row g-3 mb-5">
+    <div class="col-12 col-md-6">
+      <label for="service" class="form-label fw-semibold">Serviciu</label>
+      <select class="form-select shadow-sm" id="service" name="service" onchange="this.form.submit()">
+        <option value="">Selectează serviciul</option>
+        {% for value, display in service_choices %}
+          <option value="{{ value }}" {% if selected_service == value %}selected{% endif %}>{{ display }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="col-12 col-md-6">
+      <label for="date" class="form-label fw-semibold">Data</label>
+      <input type="date" class="form-control shadow-sm" id="date" name="date" value="{{ selected_date }}" onchange="this.form.submit()" required min="{% now 'Y-m-d' %}">
+    </div>
+  </form>
+
+  <!-- Formular complet programare -->
+  <div class="card shadow rounded-4 border-0">
+    <div class="card-body p-4">
+      <form method="POST" novalidate>
+        {% csrf_token %}
+        
+        <div class="mb-3">
+          <label for="name" class="form-label fw-semibold">Nume</label>
+          <input type="text" class="form-control shadow-sm" id="name" name="name" required placeholder="Ex: Ana Popescu" autofocus>
+        </div>
+
+        <div class="mb-3">
+          <label for="phone" class="form-label fw-semibold">Telefon</label>
+          <input type="tel" class="form-control shadow-sm" id="phone" name="phone" required pattern="\d{10}" placeholder="07xxxxxxxx" title="Introduceți un număr de telefon valid de 10 cifre">
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Serviciu</label>
+          <input type="hidden" name="service" value="{{ selected_service }}">
+          <input type="text" class="form-control shadow-sm" value="{% for value, display in service_choices %}{% if value == selected_service %}{{ display }}{% endif %}{% endfor %}" readonly {% if not selected_service %}disabled{% endif %}>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Data</label>
+          <input type="hidden" name="date" value="{{ selected_date }}">
+          <input type="text" class="form-control shadow-sm" value="{{ selected_date }}" readonly {% if not selected_date %}disabled{% endif %}>
+        </div>
+
+        <div class="mb-3">
+          <label for="time" class="form-label fw-semibold">Ora</label>
+          <select class="form-select shadow-sm" id="time" name="time" required {% if not available_times %}disabled{% endif %}>
+            <option value="">Selectează ora</option>
+            {% for time in available_times %}
+              <option value="{{ time }}">{{ time }}</option>
+            {% endfor %}
+          </select>
+          {% if not available_times and selected_date and selected_service %}
+            <div class="form-text text-danger mt-2">Nu sunt ore disponibile pentru această dată și serviciu.</div>
+          {% endif %}
+        </div>
+
+        <button type="submit" class="btn w-100 py-2 mt-3" {% if not available_times %}disabled{% endif %}>
+          Confirmă Programarea
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
